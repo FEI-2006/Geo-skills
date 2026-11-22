@@ -11,9 +11,14 @@ Produce figures that a geoscience journal will accept without a redraw request, 
 
 1. **Pin down the target before drawing.** Ask (or infer from the manuscript) three things: the journal, the column width the figure will occupy, and the figure type (map, raster result, chart, multi-panel). Look up the width in `references/journal-specs.md`. If the journal is unknown, default to Elsevier single column (90 mm) or double column (190 mm).
 2. **Inspect the data before styling it.** Report CRS, extent, pixel size or feature count, value range, nodata value and units. A figure built on the wrong CRS or an unmasked nodata value is wrong no matter how it looks. Do not reproject or resample silently; say what you changed.
-3. **Start from a template.** Use `templates/geo_map.py` for maps and raster results and `templates/geo_chart.py` for charts. Set the figure size in millimetres with `fig_size_mm()` so text prints at its real size.
+3. **Start from a template.** Use `templates/geo_map.py` for maps and raster results and `templates/geo_chart.py` for charts. Set the figure size in millimetres with `fig_size_mm()` so text prints at its real size. Useful helpers:
+   - `plot_continuous_raster()`, `plot_categorical_raster()`, `plot_vector()` (GeoDataFrames)
+   - `add_scale_bar()`, `add_north_arrow()`, `add_locator_inset()`, `add_panel_label()`, `format_lonlat_ticks()`
+   - `time_series()`, `scatter_1to1()`, `grouped_bars()`
 4. **Draw.** Apply the rules below.
-5. **Export and check.** Save vector PDF/EPS for line art and charts; save TIFF or PNG at the required dpi for rasters and photos. Then run the checklist at the end of this file and report each item as pass or fix.
+5. **Check automatically.** Run `check_figure(fig, target_width_mm)`. It flags a wrong width, text smaller than 6 pt and axes or colorbars without labels. Fix every issue it reports before saving.
+6. **Export.** Use `save_figure()`: vector PDF for line art and charts; PNG or TIFF at the required dpi for rasters and photos. Keep the PDF's text editable (the style sets embedded TrueType fonts).
+7. **Review and caption.** Run the checklist at the end of this file and report each item as pass or fix. Draft a caption with `references/captions.md` and list any display-only processing for it.
 
 ## Rules for every figure
 
@@ -44,7 +49,7 @@ Never invent, smooth or alter data to make a figure look better. If an outlier, 
 
 ## Final checklist (report pass/fix for each)
 
-1. Width matches the journal column; text ≥ 6 pt at print size.
+1. Width matches the journal column; text ≥ 6 pt at print size (`check_figure` passes).
 2. Resolution meets the journal minimum for the figure type (or the file is vector).
 3. Every axis and colorbar labelled with units.
 4. Colormap suits the data type and is colour-blind safe; no jet or rainbow.
@@ -52,4 +57,11 @@ Never invent, smooth or alter data to make a figure look better. If an outlier, 
 6. Nodata masked; classified rasters use nearest-neighbour display.
 7. Panels labelled (a), (b), … consistently.
 8. Data and imagery sources credited.
-9. Display-only processing listed for the caption.
+9. Display-only processing listed for the caption, and a draft caption provided.
+
+## Common requests
+
+- "Make a study-area map": vector boundary with `plot_vector()`, basemap or imagery if available, scale bar, north arrow, locator inset, CRS in the caption.
+- "Show my segmentation results": side-by-side panels of input image, reference labels and prediction with `plot_categorical_raster()`, the same class colours in every panel and one shared legend.
+- "Compare model accuracy": a table first; if a chart is wanted, `grouped_bars()` with the y-axis starting where differences stay honest and the range stated.
+- "Fix my figure for the journal": measure the current width and font sizes with `check_figure()`, list what fails, then redraw at the correct size instead of scaling the image.

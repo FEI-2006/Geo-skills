@@ -12,6 +12,8 @@ Polishes, restructures or translates remote sensing, GIS and geography manuscrip
 2. A change table: original → revised → reason
 3. Questions for the author about anything ambiguous, unsupported or inconsistent
 
+Four modes: **light edit** (grammar and terms only), **standard polish** (default), **translate** (Chinese to English) and **shorten** (cut to a word limit without losing numbers or the main finding).
+
 ## Example
 
 **Input**
@@ -36,7 +38,8 @@ Questions: What is the p value and sample size? Is "significant" from a statisti
 geo-polishing/
 ├── SKILL.md                     # instructions the AI agent follows
 ├── references/style-rules.md    # section-by-section conventions and word choice
-└── references/glossary.md       # Chinese → English remote sensing and GIS terms
+├── references/glossary.md       # Chinese → English remote sensing and GIS terms
+└── references/examples.md       # worked examples: abstract, methods, results
 ```
 
 ## Note on AI disclosure

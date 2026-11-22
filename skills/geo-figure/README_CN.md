@@ -15,6 +15,8 @@
 - 预测值与观测值散点图：1:1 线，并自动计算 n、R² 和 RMSE
 - 精度指标分组柱状图（OA、F1、mIoU）
 - Elsevier、IEEE、Taylor & Francis、MDPI 期刊的图片宽度与分辨率要求
+- 自动检查（`check_figure`）：图片宽度、最小字号，以及坐标轴或色带是否缺少标注
+- 地图、分割结果和精度图的图注（caption）模板
 
 ## 文件说明
 
@@ -22,6 +24,7 @@
 geo-figure/
 ├── SKILL.md                     # AI 执行时遵循的规则和流程
 ├── references/journal-specs.md  # 各出版社的栏宽与 dpi 要求
+├── references/captions.md       # 图注写法与模板
 ├── templates/geo_map.py         # 地图工具函数（只需 numpy + matplotlib）
 ├── templates/geo_chart.py       # 图表工具函数（numpy + pandas + matplotlib）
 └── examples/                    # 两个模板生成的示例图

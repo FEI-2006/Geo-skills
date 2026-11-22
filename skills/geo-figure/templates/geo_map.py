@@ -205,6 +205,55 @@ def add_locator_inset(ax, region_extent, study_extent, background=None,
     return ins
 
 
+def plot_vector(ax, gdf, column=None, categorical=False, cmap="viridis", label="",
+                color="none", edgecolor="black", linewidth=0.4, legend=True, **kwargs):
+    """Draw a GeoDataFrame (requires geopandas) with journal styling.
+
+    column=None draws outlines only (e.g., study-area boundary, roads).
+    column="name" colours features by that attribute; set categorical=True for classes.
+    The GeoDataFrame must already be in the CRS you want to show; this helper
+    never reprojects silently.
+    """
+    if column is None:
+        gdf.plot(ax=ax, color=color, edgecolor=edgecolor, linewidth=linewidth, **kwargs)
+        return ax
+    legend_kwds = {"frameon": False} if categorical else {"label": label, "shrink": 0.8}
+    gdf.plot(ax=ax, column=column, categorical=categorical, cmap=cmap, edgecolor=edgecolor,
+             linewidth=linewidth, legend=legend, legend_kwds=legend_kwds, **kwargs)
+    ax.set_aspect("equal")
+    return ax
+
+
+def check_figure(fig, target_width_mm: float, min_font_pt: float = 6.0,
+                 tolerance_mm: float = 3.0) -> dict:
+    """Check a finished figure against the journal width and minimum text size.
+
+    Returns a dict with 'pass' (bool) and 'issues' (list of strings). Font sizes
+    are checked as drawn, so call this after the figure is complete and sized
+    with fig_size_mm(). Also flags axes and colorbars without labels.
+    """
+    issues = []
+    w_mm = fig.get_figwidth() * MM_PER_INCH
+    if abs(w_mm - target_width_mm) > tolerance_mm:
+        issues.append(f"Width is {w_mm:.0f} mm; target column is {target_width_mm:.0f} mm.")
+    small = sorted({round(t.get_fontsize(), 1) for t in fig.findobj(mpl.text.Text)
+                    if t.get_text().strip() and t.get_visible() and t.get_fontsize() < min_font_pt})
+    if small:
+        issues.append(f"Text below {min_font_pt} pt at print size: {small} pt.")
+    for i, ax in enumerate(fig.axes):
+        if ax.get_label() == "<colorbar>":
+            lab = ax.get_ylabel() or ax.get_xlabel()
+            if not lab:
+                issues.append(f"Colorbar on axes {i} has no label (add the variable and units).")
+            continue
+        if not ax.axison or not ax.get_visible():
+            continue
+        has_ticks = bool(ax.get_xticks().size or ax.get_yticks().size)
+        if has_ticks and not (ax.get_xlabel() or ax.get_ylabel()) and ax.get_position().width > 0.15:
+            issues.append(f"Axes {i} has tick labels but no axis label.")
+    return {"pass": not issues, "width_mm": round(float(w_mm), 1), "issues": issues}
+
+
 def save_figure(fig, path_stem: str, dpi: int = 600, formats=("pdf", "png")) -> list[str]:
     """Save vector PDF (text editable) and a raster copy at `dpi`."""
     out = []
@@ -251,4 +300,5 @@ if __name__ == "__main__":
     b.set_ylabel("")
     add_locator_inset(a, (300_000, 700_000, 4_950_000, 5_350_000),
                       (extent[0], extent[1], extent[2], extent[3]), bounds=(0.62, 0.04, 0.3, 0.3))
+    print(check_figure(fig, WIDTHS_MM["elsevier_double"]))
     print(save_figure(fig, "example_map", dpi=500))

@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from geo_map import WIDTHS_MM, add_panel_label, fig_size_mm, save_figure, set_journal_style
+from geo_map import WIDTHS_MM, add_panel_label, check_figure, fig_size_mm, save_figure, set_journal_style
 
 # Colour-blind-safe qualitative palette (Okabe & Ito, 2008)
 OKABE_ITO = ["#0072B2", "#E69F00", "#009E73", "#D55E00", "#CC79A7", "#56B4E9", "#F0E442", "#000000"]
@@ -119,4 +119,5 @@ if __name__ == "__main__":
     for ax, lab in zip((a, b, c), "abc"):
         add_panel_label(ax, lab)
     print(stats)
+    print(check_figure(fig, WIDTHS_MM["elsevier_double"]))
     print(save_figure(fig, "example_chart", dpi=500))

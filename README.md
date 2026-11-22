@@ -1,8 +1,12 @@
-# geo-skills
+# Geo-Skills
+
+[![tests](https://github.com/FEI-2006/geo-skills/actions/workflows/tests.yml/badge.svg)](https://github.com/FEI-2006/geo-skills/actions/workflows/tests.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+![Skills: 2](https://img.shields.io/badge/skills-2-green.svg)
 
 [中文](README_CN.md)
 
-Reusable AI agent skills for remote sensing, GIS and geography research: publication-ready figures and journal-style English for geoscience papers.
+AI agent skills for remote sensing, GIS and geography research: publication-ready figures and journal-style English for geoscience papers.
 
 Each skill is a folder with a `SKILL.md` (the instructions an agent follows) plus references and templates. They work with Claude, Codex and other agents that read `SKILL.md` files.
 
@@ -10,8 +14,8 @@ Each skill is a folder with a `SKILL.md` (the instructions an agent follows) plu
 
 | Skill | Status | What it does |
 |---|---|---|
-| [geo-figure](skills/geo-figure) | Beta | Maps and charts sized and styled for Elsevier, IEEE, Taylor & Francis and MDPI journals, with Python templates |
-| [geo-polishing](skills/geo-polishing) | Draft | Polishes or translates manuscript text into clear geoscience English, with a Chinese–English terminology glossary |
+| [geo-figure](skills/geo-figure) | Beta | Maps and charts sized and styled for Elsevier, IEEE, Taylor & Francis and MDPI journals; Python templates, an automatic size and label check, and caption templates |
+| [geo-polishing](skills/geo-polishing) | Draft | Polishes or translates manuscript text into clear geoscience English without changing numbers or claims; four modes, worked examples and a Chinese–English glossary |
 
 Status labels: **Draft** = rules written, not yet tested on real cases; **Beta** = tested on examples; **Stable** = used on real academic work.
 
@@ -26,16 +30,38 @@ Status labels: **Draft** = rules written, not yet tested on real cases; **Beta**
 
 ## Install
 
-**Claude (app or claude.ai):** zip a skill folder (for example `skills/geo-figure`) and upload it under Settings → Capabilities → Skills.
+**Claude (claude.ai or the desktop app)**
+1. Download a ready-made ZIP from [`dist/`](dist): `geo-figure.zip` or `geo-polishing.zip`.
+2. Make sure code execution and file creation is turned on in Settings → Capabilities.
+3. Go to Customize → Skills, click **+**, choose **Create skill → Upload a skill**, and upload the ZIP.
 
-**Claude Code:** copy the folders into your skills directory:
+Skills you add to your Claude account also load in Claude Code when you sign in with the same account.
+
+**Claude Code (from the repository)**
 
 ```bash
 git clone https://github.com/FEI-2006/geo-skills.git
 cp -r geo-skills/skills/* ~/.claude/skills/
 ```
 
-**Other agents (Codex, etc.):** copy the whole skill folder into the agent's skills or prompts directory. Keep the `references/` and `templates/` subfolders.
+**Other agents (Codex, etc.)**: copy the whole skill folder into the agent's skills or prompts directory. Keep the `references/` and `templates/` subfolders.
+
+## Repository layout
+
+```
+skills/            one folder per skill (SKILL.md, READMEs, references, templates)
+dist/              upload-ready ZIPs, rebuilt with scripts/package_skills.py
+tests/             checks for skill structure and the Python templates
+template/SKILL.md  starting point for a new skill
+```
+
+## Development
+
+```bash
+pip install numpy pandas matplotlib pytest
+python -m pytest -q tests          # structure checks + run both figure templates
+python scripts/package_skills.py   # rebuild dist/*.zip
+```
 
 ## Roadmap
 
@@ -45,7 +71,7 @@ cp -r geo-skills/skills/* ~/.claude/skills/
 
 ## Contributing
 
-Issues and pull requests are welcome. A new skill needs a `SKILL.md`, an English and a Chinese README, and a row in the table above.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Changes are listed in [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 

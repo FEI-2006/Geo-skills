@@ -13,10 +13,30 @@ Turn the user's own text into precise, concise English that a geoscience reviewe
 2. **Lock the facts before editing.** List every number, unit, dataset name, sensor, place name, method name and citation in the input. They must appear unchanged in the output. If something looks wrong (a unit mismatch, an accuracy above 100%, a year that does not fit), do not fix it silently: flag it as a question.
 3. **Translate terms with the glossary.** Use `references/glossary.md` for Chinese→English remote sensing and GIS terms. Prefer the term the field actually uses (e.g., 绿视率 → green view index (GVI), not "green vision rate").
 4. **Edit for clarity, then style.** Fix meaning and logic first (one idea per sentence, clear subject, explicit comparison), then grammar, then concision. Follow the style rules below.
-5. **Return three things:**
-   - The polished text, ready to paste.
-   - A change table: original phrase → revised phrase → reason. Include only substantive changes, not every comma.
-   - Questions for the author: anything ambiguous, unsupported or inconsistent that you did not change.
+5. **Self-check before returning.** Compare the output with the fact list from step 2: every number, unit, name and citation must match. Check that every abbreviation is defined once, tense follows the section, and no claim is stronger than in the input.
+6. **Return three things**, in this format (see `references/examples.md` for complete examples):
+
+```
+### Polished text
+<text ready to paste>
+
+### Changes
+| Original | Revised | Reason |
+|---|---|---|
+| … | … | … |
+
+### Questions for the author
+- …
+```
+
+Include only substantive changes in the table, not every comma. Put anything ambiguous, unsupported or inconsistent that you did not change under Questions.
+
+## Modes
+
+- **Light edit**: grammar, word choice and terminology only; keep the author's sentence structure. Use when the user says "check", "proofread" or "light".
+- **Standard polish** (default): the full workflow above.
+- **Translate**: Chinese input to English. Translate meaning, not word order; Chinese paragraphs often need splitting into two or three English sentences.
+- **Shorten**: cut to a word limit (e.g., abstract to 250 words). Remove background before results; never cut numbers or the main finding. Report the final word count.
 
 ## Style rules (summary; full list in references/style-rules.md)
 

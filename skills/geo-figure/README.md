@@ -15,6 +15,8 @@ Makes publication-ready maps and charts for remote sensing, GIS and geography pa
 - Predicted-vs-observed scatter plots with a 1:1 line, n, R² and RMSE
 - Grouped bar charts for accuracy metrics (OA, F1, mIoU)
 - Width and resolution rules for Elsevier, IEEE, Taylor & Francis and MDPI journals
+- An automatic check (`check_figure`) for width, minimum text size and missing axis or colorbar labels
+- Caption templates for maps, segmentation results and accuracy figures
 
 ## Files
 
@@ -22,6 +24,7 @@ Makes publication-ready maps and charts for remote sensing, GIS and geography pa
 geo-figure/
 ├── SKILL.md                     # instructions the AI agent follows
 ├── references/journal-specs.md  # column widths and dpi by publisher
+├── references/captions.md       # how to write figure captions, with templates
 ├── templates/geo_map.py         # map helpers (numpy + matplotlib only)
 ├── templates/geo_chart.py       # chart helpers (numpy + pandas + matplotlib)
 └── examples/                    # output of the two templates
