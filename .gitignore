@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.DS_Store
+example_map.pdf
+example_map.png
+example_chart.pdf
+example_chart.png
+!skills/geo-figure/examples/*.png
