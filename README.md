@@ -2,11 +2,11 @@
 
 [![tests](https://github.com/FEI-2006/geo-skills/actions/workflows/tests.yml/badge.svg)](https://github.com/FEI-2006/geo-skills/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-![Skills: 2](https://img.shields.io/badge/skills-2-green.svg)
+![Skills: 3](https://img.shields.io/badge/skills-3-green.svg)
 
 [中文](README_CN.md)
 
-AI agent skills for remote sensing, GIS and geography research: publication-ready figures and journal-style English for geoscience papers.
+AI agent skills for remote sensing, GIS and geography research: publication-ready figures, clean legend layout and journal-style English for geoscience papers.
 
 Each skill is a folder with a `SKILL.md` (the instructions an agent follows) plus references and templates. They work with Claude, Codex and other agents that read `SKILL.md` files.
 
@@ -16,6 +16,7 @@ Each skill is a folder with a `SKILL.md` (the instructions an agent follows) plu
 |---|---|---|
 | [geo-figure](skills/geo-figure) | Beta | Maps and charts sized and styled for Elsevier, IEEE, Taylor & Francis and MDPI journals; Python templates, an automatic size and label check, and caption templates |
 | [geo-polishing](skills/geo-polishing) | Draft | Polishes or translates manuscript text into clear geoscience English without changing numbers or claims; four modes, worked examples and a Chinese–English glossary |
+| [geo-legend](skills/geo-legend) | Beta | Decides where legends and colorbars go: emptiest corner, one shared legend, direct labels or outside placement; keeps the figure size and checks for covered data, overlaps and repeats |
 
 Status labels: **Draft** = rules written, not yet tested on real cases; **Beta** = tested on examples; **Stable** = used on real academic work.
 
@@ -31,7 +32,7 @@ Status labels: **Draft** = rules written, not yet tested on real cases; **Beta**
 ## Install
 
 **Claude (claude.ai or the desktop app)**
-1. Download a ready-made ZIP from [`dist/`](dist): `geo-figure.zip` or `geo-polishing.zip`.
+1. Download a ready-made ZIP from [`dist/`](dist): `geo-figure.zip`, `geo-legend.zip` or `geo-polishing.zip`.
 2. Make sure code execution and file creation is turned on in Settings → Capabilities.
 3. Go to Customize → Skills, click **+**, choose **Create skill → Upload a skill**, and upload the ZIP.
 

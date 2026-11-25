@@ -2,7 +2,7 @@
 
 [![tests](https://github.com/FEI-2006/geo-skills/actions/workflows/tests.yml/badge.svg)](https://github.com/FEI-2006/geo-skills/actions/workflows/tests.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-![Skills: 2](https://img.shields.io/badge/skills-2-green.svg)
+![Skills: 3](https://img.shields.io/badge/skills-3-green.svg)
 
 [English](README.md)
 
@@ -16,6 +16,7 @@
 |---|---|---|
 | [geo-figure](skills/geo-figure) | Beta | 按 Elsevier、IEEE、Taylor & Francis、MDPI 期刊要求制作地图和图表；附 Python 模板、尺寸与标注自动检查，以及图注模板 |
 | [geo-polishing](skills/geo-polishing) | Draft | 把论文润色或翻译成清晰的地学英文，不改动数字和结论；四种模式、完整示例，以及中英术语表 |
+| [geo-legend](skills/geo-legend) | Beta | 图例和色带的排版：选最空的角落、多图共用一个图例、直接标注曲线或放到图外；保持图幅不变，并检查是否遮挡数据、重叠或重复（该技能仅有英文说明） |
 
 状态说明：**Draft** = 规则已写好，尚未用真实案例测试；**Beta** = 已用示例测试；**Stable** = 已用于真实学术工作。
 
@@ -29,7 +30,7 @@
 ## 安装方法
 
 **Claude（网页版或桌面应用）**
-1. 从 [`dist/`](dist) 下载做好的 ZIP：`geo-figure.zip` 或 `geo-polishing.zip`。
+1. 从 [`dist/`](dist) 下载做好的 ZIP：`geo-figure.zip`、`geo-legend.zip` 或 `geo-polishing.zip`。
 2. 确认"设置 → 功能（Capabilities）"里已开启代码执行与文件创建。
 3. 进入"自定义（Customize）→ 技能（Skills）"，点 **+**，选择 **Create skill → Upload a skill**，上传 ZIP。
 

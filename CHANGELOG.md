@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+### geo-legend (new, Beta, English only)
+- Legend and colorbar layout skill: decision table, placement guide, and `templates/legend_layout.py` with `place_legend()` (emptiest-corner search that keeps scale bar and inset free), `legend_outside()` (shared legend that keeps the figure size), `direct_labels()`, `categorical_handles()`, `add_colorbar()` and `check_legends()`.
+- Tests for placement, shared legends in both layout modes, label overlap and the automatic check.
+
+### Repository
+- `README_CN.md` is now optional for a skill.
+
 ## 0.2.0 — 2026-11-22
 
 ### geo-figure

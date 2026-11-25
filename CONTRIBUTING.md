@@ -7,8 +7,8 @@ Thanks for helping. New skills and improvements to existing ones are both welcom
 1. Copy `template/SKILL.md` into `skills/geo-<name>/SKILL.md`. The folder name must equal the `name` field.
 2. Write the `description` so an agent can tell when to use the skill: name the tasks and the words a user would say, and what the skill is not for (50–1024 characters).
 3. Put long material (specs, glossaries, examples) in `references/` and code in `templates/`. Refer to them from `SKILL.md` with their relative paths.
-4. Add `README.md` (English) and `README_CN.md` (Chinese) with a status label, what it does, an example and the file list.
-5. Add a row to the skills table in both root READMEs.
+4. Add `README.md` (English; a `README_CN.md` in Chinese is welcome but optional) with a status label, what it does, an example and the file list.
+5. Add a row to the skills table in `README.md` (and `README_CN.md`).
 6. Run the checks and rebuild the ZIPs:
 
 ```bash
